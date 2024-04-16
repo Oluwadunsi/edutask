@@ -8,4 +8,7 @@ from  src.util.dao import DAO
 @patch('src.util.dao.getValidator', autospec=True)
 def sut():
     mockeddao = mock.MagicMock()
-    return mockeddao
+    mockedsut = DAO(mockeddao)
+    
+    yield mockedsut
+    mockedsut.drop()
