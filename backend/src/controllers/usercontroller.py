@@ -18,7 +18,7 @@ class UserController(Controller):
 
         returns:
             user -- the user object associated to that email address (if multiple users are associated to that email: return the first one)
-            None -- if no user is associated to that email address
+            None -- if no user is associated to that email address 
 
         raises:
             ValueError -- in case the email parameter is not valid (i.e., conforming <local-part>@<domain>.<host>)
