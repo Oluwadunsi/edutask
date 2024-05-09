@@ -16,7 +16,7 @@ def sut(user):
 #    assert getuser == outcome 
 
 @pytest.mark.unit
-@pytest.mark.parametrize('mail, user, outcome', [("jane.doe@gmail.com", [None], None), ("jane.doe@gmail.com", ["User1"], "User1")])
+@pytest.mark.parametrize('mail, user, outcome', [("jane.doe@gmail.com", [], None), ("jane.doe@gmail.com", ["User1"], "User1")])
 def test_get_user_by_email(sut, mail, outcome):
     getuser = sut.get_user_by_email(mail)
     assert getuser == outcome 
