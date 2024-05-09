@@ -16,10 +16,18 @@ def sut(user):
 #    assert getuser == outcome 
 
 @pytest.mark.unit
-@pytest.mark.parametrize('mail, user, outcome', [("jane.doe@gmail.com", [None], None), ("jane.doe@gmail.com", ["User1"], "User1"), ("jane.doe@gmail.com", ["User1", "User2"], "User1")])
+@pytest.mark.parametrize('mail, user, outcome', [("jane.doe@gmail.com", [None], None), ("jane.doe@gmail.com", ["User1"], "User1")])
 def test_get_user_by_email(sut, mail, outcome):
     getuser = sut.get_user_by_email(mail)
     assert getuser == outcome 
+
+@pytest.mark.unit
+@pytest.mark.parametrize('mail, user, outcome', [("jane.doe@gmail.com", ["User1", "User2"], "User1")])
+def test_get_user_by_email_multi(sut, mail, outcome, capsys):
+    getuser = sut.get_user_by_email(mail)
+    captured = capsys.readouterr()
+    assert getuser == outcome 
+    assert captured.out == "Error: more than one user found with mail jane.doe@gmail.com\n"
 
 @pytest.mark.unit
 @pytest.mark.parametrize('mail, user, outcome', [("jane.doe.com", [None], None), ("jane.doe.com", ["User1"], "User1"), ("jane.doe.com", ["User1", "User2"], "User1")])
